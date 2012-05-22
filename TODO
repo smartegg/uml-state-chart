@@ -1,0 +1,6 @@
+5.  please add thread-safe support.
+4.  think how to design and support a  submachine
+3.  make all  State/Event/Action/Guard  supply  a singeleton  instance.
+2.  use  adj-list+ binary search to  repleace the   tree in tree data structure.  tree in tree is not elegant here.
+1.  typeid(var).name()  string   is not  elegant and strange in gcc, rethink another way to impl it .
+
