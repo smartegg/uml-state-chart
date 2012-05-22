@@ -37,7 +37,8 @@ class Event {
  */
 class Action {
   public:
-    virtual ~Action() = 0;
+    virtual ~Action() ;
+    virtual void run() = 0;
 };
 
 /**
@@ -47,18 +48,17 @@ class Action {
  */
 class Guard {
   public:
-    virtual ~Guard() = 0;
+    virtual ~Guard() ;
+    virtual bool run() = 0;
 };
 
-struct none : Guard {
-  bool operator()() {
-    return true;
-  }
+struct None : Guard {
+  bool run() {}
 };
 
 struct Transition {
-  State& sourceStatus;
-  State& destStatus;
+  State& sourceState;
+  State& destState;
   Event& event;
   Action& action;
   Guard& guard;
