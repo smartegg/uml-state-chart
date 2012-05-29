@@ -9,7 +9,7 @@ namespace fsm {
 
 /**
  * @brief State represent the State in UML statechart, support entry/exit semantic
- *   FIXME:  every state must be  identify  as a unique number ?
+ *   TODO:   entry/exit semantic support
  *
  */
 class State {

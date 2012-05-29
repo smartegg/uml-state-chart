@@ -1,3 +1,5 @@
+6.  extract the TransitionTable from the inner of the StateMachine, 
+      to improve StateMachine creation  if need to create 10K same clients 
 5.  please add thread-safe support.
 4.  think how to design and support a  submachine
 3.  make all  State/Event/Action/Guard  supply  a singeleton  instance.
