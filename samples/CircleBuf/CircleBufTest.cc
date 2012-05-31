@@ -1,8 +1,8 @@
 /**
  * @file CircleBufTest.cc
- * @comment 
+ * @comment
  * implement the test cases of circle buffer
- * 
+ *
  * @author niexw
  * @email xiaowen.nie.cn@gmail.com
  */
@@ -10,7 +10,7 @@
 #include <string>
 #include <iostream>
 
-#include "misc/CircleBuf.h"
+#include "CircleBuf.h"
 #include "CircleBufTest.h"
 
 using namespace std;
@@ -58,14 +58,14 @@ void CircleBufTestCases::testBuffer()
 
 	buffer.adjustAfterPop(1);
 	BOOST_CHECK(buffer.size() == 1);
-	
+
 	buffer.getAppendIov(iovp, cnt);
 	BOOST_CHECK(cnt == 2);
 	BOOST_CHECK(iov[0].iov_base = (char*)pc+3);
 	BOOST_CHECK(iov[0].iov_len = 1);
 	BOOST_CHECK(iov[1].iov_base = pc);
 	BOOST_CHECK(iov[1].iov_len = 2);
-	
+
 	buffer.adjustAfterAppend(2);
 	BOOST_CHECK(buffer.size() == 3);
 
@@ -86,5 +86,6 @@ void CircleBufTestCases::testBuffer()
 
 	buffer.adjustAfterAppend(3);
 	BOOST_CHECK(buffer.size() == 4);
+
 }
 

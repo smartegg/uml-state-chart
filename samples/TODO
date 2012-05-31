@@ -1,0 +1,3 @@
+1. write a naive version of  echo server , 
+2. write a CircleBuf version of the echo server
+3. write a  CircleBuf version with state machine of the echo server
