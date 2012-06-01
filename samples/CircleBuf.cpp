@@ -77,6 +77,7 @@ void CircleBuf::getPopIov(struct iovec* &iov, int& cnt) {
 }
 
 void CircleBuf::adjustAfterPop(size_t len)  {
+  printf("total:%d idle: %d pop:%d\n",length_, idleSize_, len);
   assert(len <= (length_ - idleSize_) && len >= 0);
 
   idleSize_ += len;
