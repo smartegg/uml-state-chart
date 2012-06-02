@@ -14,7 +14,10 @@ class Session {
   public:
     Session(boost::asio::io_service& io_service)
       : socket_(io_service),
-        buf_(5) {
+        buf_(5000) ,
+        regReadSet_(false),
+        regWriteSet_(false),
+        isReadComplete_(false){
 
     }
 
@@ -35,27 +38,35 @@ class Session {
     void handle_read(const boost::system::error_code& error,
                      size_t bytes_transferred) {
       if (!error) {
-        std::cout << "bytes_readed: " << bytes_transferred << std::endl;
+        std::cout << "invoke read: " << bytes_transferred << std::endl;
         buf_.adjustAfterAppend(bytes_transferred);
 
-        if (!buf_.isEmpty()) {
+        regReadSet_ = false;
+
+        if (!buf_.isEmpty() && !regWriteSet_) {
           start_write();
-          return;
         }
 
-        start_read();
+        if (!buf_.isFull() && !regReadSet_) {
+          start_read();
+        }
 
       } else {
-        delete this;
 
         if (error == boost::asio::error::eof) {
-          puts("client shutdown");
-        }
+          puts("read over");
+          isReadComplete_ = true;
 
-        if (error != boost::asio::error::eof) {
+          if (buf_.isEmpty()) {
+            puts("no more read ,  close thise session");
+            delete this;
+          }
+        } else {
+          delete this;
           puts("handle_read error");
           throw boost::system::system_error(error);
         }
+
       }
 
     }
@@ -63,15 +74,24 @@ class Session {
     void handle_write(const boost::system::error_code& error,
                       size_t bytes_transferred) {
       if (!error) {
-        std::cout << "bytes_write: " << bytes_transferred << std::endl;
+        std::cout << "invoke write: " << bytes_transferred << std::endl;
         buf_.adjustAfterPop(bytes_transferred);
 
-        if (buf_.isEmpty()) {
-          start_read() ;
+        regWriteSet_ = false;
+
+        if (buf_.isEmpty() && isReadComplete_)  {
+          puts("write back all buffer data, close the server's session");
+          delete this;
           return;
         }
 
-        start_write();
+        if (!buf_.isEmpty() && !regWriteSet_) {
+          start_write();
+        }
+
+        if (!buf_.isFull() && !regReadSet_ && !isReadComplete_) {
+          start_read();
+        }
 
       } else {
    //     puts("handle_write error");
@@ -84,6 +104,7 @@ class Session {
 
   private:
     void start_read() {
+      regReadSet_ = true;
       struct iovec  iov[2];
       struct iovec* p = iov;
       int cnt = 0;
@@ -91,7 +112,7 @@ class Session {
 
       std::vector<boost::asio::mutable_buffer> bufs;
 
-      std::cout << "get free space: " << std::endl;
+      std::cout << "reg read() : get free space " << std::endl;
       for (int i = 0; i < cnt;  i++) {
         bufs.push_back(boost::asio::buffer(iov[i].iov_base, iov[i].iov_len));
         std::cout << "free space: " << i <<  "\t" << iov[i].iov_len << "\n";
@@ -107,6 +128,7 @@ class Session {
     }
 
     void start_write() {
+      regWriteSet_ = true;
       struct iovec  iov[2];
 
       struct iovec* p = iov;
@@ -117,7 +139,7 @@ class Session {
 
       std::vector<boost::asio::const_buffer> bufs;
 
-      std::cout << "get consumed space" << std::endl;
+      std::cout << "reg write(): get consumed space" << std::endl;
       for (int i = 0; i < cnt;  i++) {
         bufs.push_back(boost::asio::buffer(iov[i].iov_base, iov[i].iov_len));
         std::cout << "consumed space: " << i <<  "\t" << iov[i].iov_len << "\n";
@@ -138,6 +160,10 @@ class Session {
 
     tcp::socket socket_;
     CircleBuf   buf_;
+
+    bool regReadSet_;
+    bool regWriteSet_;
+    bool isReadComplete_;
 };
 
 
