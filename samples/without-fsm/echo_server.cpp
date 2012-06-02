@@ -54,11 +54,11 @@ class Session {
       } else {
 
         if (error == boost::asio::error::eof) {
-          puts("read over");
+          puts("read complete");
           isReadComplete_ = true;
 
-          if (buf_.isEmpty()) {
-            puts("no more read ,  close thise session");
+          if (buf_.isEmpty() && !regWriteSet_) {
+            puts(" close thise session");
             delete this;
           }
         } else {
