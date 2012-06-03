@@ -10,6 +10,7 @@
 #define _NDSL_STATEMACHINE_HPP_
 
 #include <map>
+#include <vector>
 #include "TransitionTable.hpp"
 
 namespace ndsl {
@@ -22,7 +23,7 @@ namespace fsm {
  */
 class StateMachine {
   public:
-    StateMachine(Transition* transitions, int len , State& initStatus);
+    StateMachine(Transition* transitions, size_t len , State& initStatus);
     virtual ~StateMachine();
 
     void start();
@@ -37,8 +38,6 @@ class StateMachine {
      */
     void buildMachine();
 
-    Transition* table_;
-    int size_;
 
     struct Data {
       Data(State* d=0, Action* a=0, Guard* g=0)
@@ -55,6 +54,7 @@ class StateMachine {
     State* status_;
 
     std::map<State*, std::map<Event*, Data>  >  maps_;
+    std::vector<Transition> table_;
 };
 
 } //namespace fsm

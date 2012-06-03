@@ -1,0 +1,96 @@
+DEBUG: N12_GLOBAL__N_113ReadOnlyStateE	to	N12_GLOBAL__N_117ReadOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_117ReadOnlyWaitStateE	to	N12_GLOBAL__N_118WriteOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_117ReadOnlyWaitStateE	to	N12_GLOBAL__N_110CloseStateE
+DEBUG: N12_GLOBAL__N_117ReadOnlyWaitStateE	to	N12_GLOBAL__N_118ReadWriteWaitStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_118ReadWriteWaitStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_118ReadWriteWaitStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_118WriteOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_113ShuttingStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_117ReadOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_118WriteOnlyWaitStateE	to	N12_GLOBAL__N_117ReadOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_118WriteOnlyWaitStateE	to	N12_GLOBAL__N_118ReadWriteWaitStateE
+DEBUG: N12_GLOBAL__N_113ShuttingStateE	to	N12_GLOBAL__N_110CloseStateE
+321	N12_GLOBAL__N_113ReadOnlyStateE
+DEBUG:before transition: N12_GLOBAL__N_113ReadOnlyStateE
+typeid: N12_GLOBAL__N_112RegReadEventE
+in reg_read(): free idx: 0  6
+get free space: 
+free space: 0	6
+DEBUG:after transition: N12_GLOBAL__N_117ReadOnlyWaitStateE
+326	N12_GLOBAL__N_117ReadOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_113ReadOnlyStateE	to	N12_GLOBAL__N_117ReadOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_117ReadOnlyWaitStateE	to	N12_GLOBAL__N_118WriteOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_117ReadOnlyWaitStateE	to	N12_GLOBAL__N_110CloseStateE
+DEBUG: N12_GLOBAL__N_117ReadOnlyWaitStateE	to	N12_GLOBAL__N_118ReadWriteWaitStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_118ReadWriteWaitStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_118ReadWriteWaitStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_118WriteOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_113ShuttingStateE
+DEBUG: N12_GLOBAL__N_118ReadWriteWaitStateE	to	N12_GLOBAL__N_117ReadOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_118WriteOnlyWaitStateE	to	N12_GLOBAL__N_117ReadOnlyWaitStateE
+DEBUG: N12_GLOBAL__N_118WriteOnlyWaitStateE	to	N12_GLOBAL__N_118ReadWriteWaitStateE
+DEBUG: N12_GLOBAL__N_113ShuttingStateE	to	N12_GLOBAL__N_110CloseStateE
+321	N12_GLOBAL__N_113ReadOnlyStateE
+invoke_read: 6
+333	N12_GLOBAL__N_117ReadOnlyWaitStateE
+in invoke_read()  free idx: 0  6
+total:6 idle: 6 push:6
+DEBUG:before transition: N12_GLOBAL__N_117ReadOnlyWaitStateE
+in reg_write() free idx: 0  0
+get consumed space
+consumed space: 0	6
+DEBUG:after transition: N12_GLOBAL__N_118WriteOnlyWaitStateE
+345	N12_GLOBAL__N_118WriteOnlyWaitStateE
+invoke_write: 6
+366	N12_GLOBAL__N_118WriteOnlyWaitStateE
+in invoke_write: free idx: 0  0
+total:6 idle: 0 pop:6
+DEBUG:before transition: N12_GLOBAL__N_118WriteOnlyWaitStateE
+typeid: N12_GLOBAL__N_118WriteDataFullEventE
+in reg_read(): free idx: 0  6
+get free space: 
+free space: 0	6
+DEBUG:after transition: N12_GLOBAL__N_117ReadOnlyWaitStateE
+378	N12_GLOBAL__N_117ReadOnlyWaitStateE
+invoke_read: 2
+333	N12_GLOBAL__N_117ReadOnlyWaitStateE
+in invoke_read()  free idx: 0  6
+total:6 idle: 6 push:2
+DEBUG:before transition: N12_GLOBAL__N_117ReadOnlyWaitStateE
+in reg_read(): free idx: 2  4
+get free space: 
+free space: 0	4
+in reg_write() free idx: 2  4
+get consumed space
+consumed space: 0	2
+DEBUG:after transition: N12_GLOBAL__N_118ReadWriteWaitStateE
+345	N12_GLOBAL__N_118ReadWriteWaitStateE
+invoke_write: 2
+366	N12_GLOBAL__N_118ReadWriteWaitStateE
+in invoke_write: free idx: 2  4
+total:6 idle: 4 pop:2
+DEBUG:before transition: N12_GLOBAL__N_118ReadWriteWaitStateE
+typeid: N12_GLOBAL__N_118WriteDataFullEventE
+in reg_read(): free idx: 2  6
+get free space: 
+free space: 0	4
+free space: 1	2
+DEBUG:after transition: N12_GLOBAL__N_117ReadOnlyWaitStateE
+378	N12_GLOBAL__N_117ReadOnlyWaitStateE
+invoke_read: 4
+333	N12_GLOBAL__N_117ReadOnlyWaitStateE
+in invoke_read()  free idx: 2  6
+total:6 idle: 6 push:4
+DEBUG:before transition: N12_GLOBAL__N_117ReadOnlyWaitStateE
+in reg_read(): free idx: 0  2
+get free space: 
+free space: 0	2
+in reg_write() free idx: 0  2
+get consumed space
+consumed space: 0	4
+DEBUG:after transition: N12_GLOBAL__N_118ReadWriteWaitStateE
+345	N12_GLOBAL__N_118ReadWriteWaitStateE
+invoke_read: 5
+333	N12_GLOBAL__N_118ReadWriteWaitStateE
+in invoke_read()  free idx: 0  2
+total:6 idle: 2 push:5

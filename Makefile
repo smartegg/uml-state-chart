@@ -1,2 +1,3 @@
 all:
-	g++ *.cpp
+	g++ -c *.cpp
+	g++ *.o

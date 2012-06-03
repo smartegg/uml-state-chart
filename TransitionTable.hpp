@@ -38,7 +38,7 @@ class Event {
 class Action {
   public:
     virtual ~Action() ;
-    virtual void run(void* pData) = 0;
+    virtual void run(Event* ev) = 0;
 };
 
 /**
@@ -54,12 +54,13 @@ class Guard {
 
 
 struct Transition {
-  State& sourceState;
-  State& destState;
-  Event& event;
-  Action& action;
-  Guard& guard;
+  State* sourceState;
+  State* destState;
+  Event* event;
+  Action* action;
+  Guard* guard;
 };
+
 
 
 } //namespace fsm

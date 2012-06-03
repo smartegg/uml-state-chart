@@ -5,32 +5,34 @@
 using namespace ndsl::fsm;
 
 
-struct StatusA : State {
-  void onEntry() {
-    puts("A: onEntry");
-  }
-  void onExit() {
-    puts("A: onExit");
-  }
-};
+struct StatusA : State {};
 struct StatusB : State {};
 struct StatusC : State {};
 
-struct EventA  : Event {};
+struct EventA  : Event {
+  int b;
+};
 struct ActionA   : Action  {
-  void run() {
-    puts("hello world\n");
+  void run(Event* ev) {
+    EventA* a = static_cast<EventA*>(ev);
+    printf("%d\n", a->b);
+  }
+};
+
+struct None : Guard {
+  bool run() {
+    return true;
   }
 };
 
 
 int main(int argc, char const* argv[]) {
-  StatusA sa;
-  StatusB sb;
-  StatusC sc;
-  EventA ea;
-  ActionA aa;
-  None none;
+  StatusA* sa = new StatusA();
+  StatusB* sb = new StatusB();
+  StatusC* sc = new StatusC();
+  EventA* ea = new EventA();
+  ActionA* aa = new ActionA();
+  None* none = new None();
 
 
   Transition transitions[] = {
@@ -38,12 +40,14 @@ int main(int argc, char const* argv[]) {
     {sb, sc, ea, aa, none}
   };
 
-  StateMachine sm(transitions, 2, sa);
+  StateMachine sm(transitions, 2, *sa);
   sm.start();
 //  std::cout<< sm.currentState().name()<<std::endl;
-  sm.processEvent(ea);
+  ea->b = 1;
+  sm.processEvent(*ea);
 //  std::cout<< sm.currentState().name()<<std::endl;
-  sm.processEvent(ea);
+  ea->b = 2;
+  sm.processEvent(*ea);
 //  std::cout<< sm.currentState().name()<<std::endl;
 
 

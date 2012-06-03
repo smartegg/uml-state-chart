@@ -45,8 +45,12 @@ int main(int argc, char const* argv[]) {
       boost::system::error_code error;
       std::cin.getline(buf.data(), 1024);
       int total_write = strlen(buf.data()) + 1;
-      boost::asio::write(socket, boost::asio::buffer(buf, total_write), error);
 
+      if (total_write == 1) {
+        socket.shutdown(boost::asio::ip::tcp::socket::shutdown_send, error);
+      } else {
+        boost::asio::write(socket, boost::asio::buffer(buf, total_write), error);
+      }
       if (error) {
         throw boost::system::system_error(error);
       }
@@ -54,6 +58,7 @@ int main(int argc, char const* argv[]) {
       boost::asio::read(socket, boost::asio::buffer(buf, total_write), error);
 
       if (error == boost::asio::error::eof) {
+        std::cout << "server session just close\n";
         break;
       } else if (error) {
         throw boost::system::system_error(error);
